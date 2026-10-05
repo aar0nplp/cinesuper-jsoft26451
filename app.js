@@ -94,10 +94,14 @@ async function openMovie(id) {
   const m = movies.find((x) => x.id === id);
   if (!m) return;
   currentMovieId = id;
+  
+  // Added director below:
   movieDetail.innerHTML = `
     <h2>${escapeHtml(m.title)}</h2>
     <p class="meta">${m.release_year} · ${escapeHtml(m.language)} · ${escapeHtml(m.genres?.name)} · ${m.duration_min} min</p>
+    <p class="meta"><strong>Director:</strong> ${escapeHtml(m.director || 'Unknown')}</p>
     <p>${escapeHtml(m.description)}</p>`;
+    
   modal.classList.remove("hidden");
   await loadReviews(id);
 }
